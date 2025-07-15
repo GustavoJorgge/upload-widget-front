@@ -1,9 +1,12 @@
 import { useDropzone } from "react-dropzone";
 import { motion } from "motion/react";
 import CircularProgressBar from "./ui/circular-progress-bar";
+import { useUploads } from "../store/uploads";
 
 export function UploadWidgetDropzone() {
-  const isThereAnyPendingUpload = true;
+  const { addUploads } = useUploads();
+
+  const isThereAnyPendingUpload = false;
   const uploadGlobalPercentage = 66;
 
   // Configura o hook useDropzone com as opções de upload
@@ -15,7 +18,7 @@ export function UploadWidgetDropzone() {
     },
     // Callback executado quando arquivos são soltos na área de drop
     onDrop(acceptedFiles, fileRejections, event) {
-      console.log(acceptedFiles); // Log dos arquivos aceitos
+      addUploads(acceptedFiles);
     },
   });
 
