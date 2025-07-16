@@ -20,7 +20,7 @@ export function UploadWidgetUploadList() {
         </span>
       ) : (
         <div className="space-y-2">
-          {Array.from(uploads.entries()).map(([uploadId, upload]) => {
+          {Array.from(uploads).map(([uploadId, upload]) => {
             return (
               <UploadWidgetUploadItem
                 key={uploadId}
