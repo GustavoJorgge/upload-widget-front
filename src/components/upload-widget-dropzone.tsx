@@ -13,7 +13,7 @@ export function UploadWidgetDropzone() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     // Define os tipos de arquivo aceitos
     accept: {
-      "image/png": [".png"], // Aceita apenas arquivos PNG
+      "image/png": [".png", ".jpg", ".jpeg"], // Aceita apenas arquivos PNG
       "text/html": [".html", ".htm"], // Aceita arquivos HTML
     },
     // Callback executado quando arquivos são soltos na área de drop
