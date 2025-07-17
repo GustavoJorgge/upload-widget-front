@@ -44,8 +44,17 @@ export function UploadWidgetUploadItem({
           </span>
           <div className="size-1 rounded-full bg-zinc-700" />
           <span>
-            300kb
-            <span className="text-green-400 ml-1"></span>
+            {formatBytes(upload.compressedSizeInBytes ?? 0)}
+            {upload.compressedSizeInBytes && (
+              <span className="text-green-400 ml-1">
+                -
+                {Math.round(
+                  ((upload.originalSizeInBytes - upload.compressedSizeInBytes) *
+                    100) /
+                    upload.originalSizeInBytes
+                )}
+              </span>
+            )}
           </span>
           <div className="size-1 rounded-full bg-zinc-700" />
           {upload.status == "success" && <span>100%</span>}
@@ -73,10 +82,17 @@ export function UploadWidgetUploadItem({
       </Progress.Root>
 
       <div className="absolute top-2.5 right-2.5 flex items-center gap-1">
-        <Button size="icon-sm" disabled={upload.status !== "success"}>
-          <Download className="size-4" strokeWidth={1.5} />
-          <span className="sr-only">Download comprime imagem</span>
+        <Button
+          size="icon-sm"
+          aria-disabled={upload.status !== "success"}
+          asChild
+        >
+          <a href={upload.remoteUrl} download>
+            <Download className="size-4" strokeWidth={1.5} />
+            <span className="sr-only">Download comprime imagem</span>
+          </a>
         </Button>
+
         <Button
           size="icon-sm"
           disabled={!upload.remoteUrl}
@@ -87,6 +103,7 @@ export function UploadWidgetUploadItem({
           <Link2 className="size-4" strokeWidth={1.5} />
           <span className="sr-only">Copiar URL da imagem</span>
         </Button>
+
         <Button
           disabled={!["canceled", "error"].includes(upload.status)}
           size="icon-sm"
@@ -94,6 +111,7 @@ export function UploadWidgetUploadItem({
           <RefreshCcw className="size-4" strokeWidth={1.5} />
           <span className="sr-only">Tentar upload novamente</span>
         </Button>
+
         <Button
           disabled={upload.status !== "progress"}
           size="icon-sm"
