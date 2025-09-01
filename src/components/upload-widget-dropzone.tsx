@@ -17,7 +17,7 @@ export function UploadWidgetDropzone() {
       "text/html": [".html", ".htm"], // Aceita arquivos HTML
     },
     // Callback executado quando arquivos são soltos na área de drop
-    onDrop(acceptedFiles, fileRejections, event) {
+    onDrop(acceptedFiles, _fileRejections, _event) {
       addUploads(acceptedFiles);
     },
   });

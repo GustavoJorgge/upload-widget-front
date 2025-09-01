@@ -47,8 +47,6 @@ export const useUploads = create<UploadState, [["zustand/immer", never]]>(
         return;
       }
 
-      const abortController = new AbortController();
-
       updateUpload(uploadId, {
         uploadSizeInBytes: 0,
         remoteUrl: undefined,
