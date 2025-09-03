@@ -93,7 +93,15 @@ export function UploadWidgetUploadItem({
             }
           }}
         >
-          <Download className="size-4" strokeWidth={1.5} />
+          <Download
+            className="size-4"
+            strokeWidth={1.5}
+            onClick={() => {
+              if (upload.remoteUrl) {
+                downloadUrl(upload.remoteUrl);
+              }
+            }}
+          />
           <span className="sr-only">Download comprime imagem</span>
         </Button>
 
