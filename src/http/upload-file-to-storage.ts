@@ -17,15 +17,19 @@ export async function uploadFileToStorage(
 
   data.append("file", file);
 
-  const response = await axios.post("http://localhost:3333/uploads", data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    signal: opts?.signal,
-    onUploadProgress(progressEvent) {
-      onProgress(progressEvent.loaded);
-    },
-  });
+  const response = await axios.post(
+    "https://6cmfihky4x.us-east-1.awsapprunner.com/uploads",
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      signal: opts?.signal,
+      onUploadProgress(progressEvent) {
+        onProgress(progressEvent.loaded);
+      },
+    }
+  );
 
   return { url: response.data.url };
 }
